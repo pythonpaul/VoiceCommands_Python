@@ -3,9 +3,8 @@ import os
 import sys
 import pyautogui
 
+#import speech
 
-
-import speech
 r = sr.Recognizer()
 #r.energy_threshold = 500
 
@@ -23,7 +22,7 @@ def listen():
         command = r.recognize_google(audio)
         print("Predictions: " + command)
         if "volume up" in command:
-            speech.say('volume up')
+            #speech.say('volume up')
             l = command.split()
             for i in range(20):
                 pyautogui.hotkey('volumeup')
@@ -35,7 +34,7 @@ def listen():
             #pyautogui.hotkey('fn', 'pause')
             listen()
         if "close tab" in command:
-            speech.say('closing tab')
+            #speech.say('closing tab')
             pyautogui.hotkey('ctrl', 'w')
             listen()
             #listen()
@@ -43,11 +42,11 @@ def listen():
             l = command.split()
             i = l.index('close')
             kill = "taskkill /f /im " + command.split()[i+1] + ".exe"
-            speech.say('closing ' + command.split()[i+1])
+            #speech.say('closing ' + command.split()[i+1])
             os.system(kill)
             listen()
         if "exit" in command:
-            speech.say('closing program')
+            #speech.say('closing program')
             sys.exit()
         if "type" in command:
             l = command.split()
@@ -61,13 +60,12 @@ def listen():
         if "open" in command:
             l = command.split()
             i = l.index('open')
-
             if l[i + 1] != "chrome" or "firefox":
                 os.system("start " + l[i + 1])
 
             if l[i + 1] != "chrome" or "firefox":
                     os.system("start " + l[i + 1] + ":")
-            speech.say('starting' + l[i + 1])
+            #speech.say('starting' + l[i + 1])
         if "press enter" in command:
             pyautogui.press("enter")
         if command == "new tab":
@@ -91,10 +89,10 @@ def listen():
             print("start " + "www." + l[i+1])
             listen()
         if "scroll down" in command:
-            l = command.split()
-            i = l.index('down')
-            for i in range(int(l[i+1])):
-                pyautogui.scroll(-10)
+            #l = command.split()
+            #i = l.index('down')
+            #for i in range(int(l[i+1])):
+            pyautogui.scroll(-50)
             listen()
         #if '.com' is after browser check, program doesn't run .com check suspecting "or" statement interference
         else:
@@ -106,7 +104,6 @@ def listen():
     except Exception:
         print("Something went wrong")
         listen()
-
 listen()
 
 
